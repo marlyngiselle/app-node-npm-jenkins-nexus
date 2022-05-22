@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'docker stop contenedor || echo "No hay contenedor corriendo"'
                 sh 'docker rm contenedor || echo "No hay contenedor para borrar"'
-                sh 'docker build . -t registrycicd:8085/${JOB_NAME}:v${BUILD_NUMBER}'
+                sh 'docker build . -f docker-compose.yaml -t registrycicd:8085/${JOB_NAME}:v${BUILD_NUMBER}'
             }
         }
 
