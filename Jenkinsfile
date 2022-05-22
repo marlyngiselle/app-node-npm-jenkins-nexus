@@ -31,7 +31,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 80:3000 --name contenedor registrycicd:8085/${JOB_NAME}:latest'
+                sh 'docker-compose up -d -p 80:3000 --name contenedor registrycicd:8085/${JOB_NAME}:latest'
             }
         }
 

@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+
+  nodejs:
+    build:
+    context: .
+    dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: always
+    ports:
+      - 80:3000
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+
+
+  webserver:
+    restart: always
+    image: joxit/docker-registry-ui:latest
+    ports:
+      - 80:3000
+    environment:
+      - REGISTRY_TITLE=NEO Registry privado de Imagenes Docker mi-docker-registry
+      - NGINX_PROXY_PASS_URL=http://contenedor_registry:3000
+    depends_on:
+      - registry
+    container_name: miApp
+
